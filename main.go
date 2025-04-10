@@ -1,14 +1,14 @@
 package main
 
 import (
-	"encoding/json"
+	//"encoding/json"
 	"fmt"
+	"go-job-service/router"
 	"log"
 	"net/http"
 	"os"
 	"time"
 
-	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 )
 
@@ -27,13 +27,11 @@ func main() {
 		log.Printf("Defaulting to port %s", port)
 	}
 
-	r := mux.NewRouter()
-
-	r.HandleFunc("/healthz", healthCheckHandler).Methods(http.MethodGet)
+	appRouter := router.NewServiceRouter()
 
 	server := &http.Server{
 		Addr:         ":" + port,
-		Handler:      r,
+		Handler:      appRouter,
 		ReadTimeout:  5 * time.Second,
 		WriteTimeout: 10 * time.Second,
 		IdleTimeout:  120 * time.Second,
@@ -45,19 +43,3 @@ func main() {
 		log.Fatalf("failed to start server: %v", err)
 	}
 }
-
-func healthCheckHandler(w http.ResponseWriter, r *http.Request) {
-
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
-
-	response := map[string]string{"status": "ok"}
-	err := json.NewEncoder(w).Encode(response)
-	if err != nil {
-		fmt.Printf("Failed writing health check response: %v", err)
-	}
-}
-
-//func hello() {
-//	fmt.Println("Hello wor")
-//}

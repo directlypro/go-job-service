@@ -2,14 +2,18 @@ package router
 
 import (
 	"github.com/gorilla/mux"
+	"go-job-service/handler"
+	"log"
 	"net/http"
-	"time"
 )
 
-type service struct {
-	httpServer http.Server
-	url        string
-	timeout    time.Duration
-	router     *mux.Router
-	jobsApi    *jobsApi
+func NewServiceRouter() *mux.Router {
+	r := mux.NewRouter()
+
+	//Route Register
+	r.HandleFunc("/healthz", handler.HealthCheck).Methods(http.MethodGet)
+	r.HandleFunc("/api/v1/jobs", handler.GetJobsHandler).Methods(http.MethodGet)
+
+	log.Println("API v1 routes registered")
+	return r
 }
