@@ -61,3 +61,14 @@ type RawAddress struct {
 	AddressRegion   interface{} `json:"addressRegion"`
 	StreetAddress   interface{} `json:"streetAddress"`
 }
+
+type GoJobServiceResponse struct {
+	JobTitle         string `json:"job_title"`
+	JobUrl           string `json:"job_url"`
+	JobDescription   string `json:"job_description,omitempty"`
+	JobType          string `json:"job_type"`
+	Organization     string `json:"organization"`
+	OrganizationUrl  string `json:"organization_url"`
+	OrganizationLogo string `json:"organization_logo"`
+	JobDatePosted    string `json:"job_date_posted"`
+}

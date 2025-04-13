@@ -4,8 +4,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"go-job-service/client"
+	"go-job-service/model"
 	"log"
 	"net/http"
+	"strings"
 )
 
 func GetJobsHandler(w http.ResponseWriter, r *http.Request) {
@@ -37,5 +39,17 @@ func GetJobsHandler(w http.ResponseWriter, r *http.Request) {
 		log.Printf("GetJobsHandler() Error encoding response: %v\n", err)
 		http.Error(w, "Failed to get job listing from teh external source", http.StatusInternalServerError)
 	}
+
+}
+
+func jobsFormatter(jobs []model.LinkedinJobApiResponse) ([]model.GoJobServiceResponse, error) {
+	fmt.Println("jobsFormatter()")
+
+	if len(jobs) == 0 {
+		log.Println("jobsFormatter(): No jobs found")
+		return nil, fmt.Errorf("jobsFormatter(): No jobs found for the given job list. Lengthog jobs returned (%d)", len(jobs))
+	}
+
+	var result []model.GoJobServiceResponse
 
 }
