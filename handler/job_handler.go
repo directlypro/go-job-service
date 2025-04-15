@@ -4,10 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"go-job-service/client"
-	"go-job-service/model"
 	"log"
 	"net/http"
-	"strings"
 )
 
 func GetJobsHandler(w http.ResponseWriter, r *http.Request) {
@@ -42,14 +40,14 @@ func GetJobsHandler(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func jobsFormatter(jobs []model.LinkedinJobApiResponse) ([]model.GoJobServiceResponse, error) {
-	fmt.Println("jobsFormatter()")
-
-	if len(jobs) == 0 {
-		log.Println("jobsFormatter(): No jobs found")
-		return nil, fmt.Errorf("jobsFormatter(): No jobs found for the given job list. Lengthog jobs returned (%d)", len(jobs))
-	}
-
-	var result []model.GoJobServiceResponse
-
-}
+//func jobsFormatter(jobs []model.LinkedinJobApiResponse) ([]model.GoJobServiceResponse, error) {
+//	fmt.Println("jobsFormatter()")
+//
+//	if len(jobs) == 0 {
+//		log.Println("jobsFormatter(): No jobs found")
+//		return nil, fmt.Errorf("jobsFormatter(): No jobs found for the given job list. Lengthog jobs returned (%d)", len(jobs))
+//	}
+//
+//	var result []model.GoJobServiceResponse
+//
+//}
